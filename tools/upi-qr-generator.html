@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI QR Code Generator — Direct Payment Link with Amount</title>
+  <meta name="description" content="Generate instant, scannable UPI QR codes for BHIM, Google Pay, PhonePe, and Paytm. Add customizable payee names, amounts, and transaction notes.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/upi-qr-generator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">UPI QR Generator</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">NPCI UPI Format</span>
+      <h1>UPI QR Code Generator</h1>
+      <p class="subtitle">Create instant scan-to-pay QR codes for Google Pay, PhonePe, Paytm, and BHIM.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+        <div>
+          <div class="form-group">
+            <label for="upiId">UPI ID / VPA (Required):</label>
+            <input type="text" id="upiId" class="input-field" placeholder="e.g. yourname@okhdfcbank" value="merchant@upi">
+          </div>
+          <div class="form-group">
+            <label for="payeeName">Payee Name (Optional):</label>
+            <input type="text" id="payeeName" class="input-field" placeholder="e.g. Amit Store" value="Business Store">
+          </div>
+          <div class="form-group">
+            <label for="amount">Fixed Amount (₹ Optional):</label>
+            <input type="number" id="amount" class="input-field" placeholder="e.g. 500">
+          </div>
+          <div class="form-group">
+            <label for="note">Transaction Note (Optional):</label>
+            <input type="text" id="note" class="input-field" placeholder="e.g. Order #104">
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <div id="qrcodeBox" style="background:#fff; padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-light);"></div>
+          <button id="downloadQrBtn" class="btn-primary" style="margin-top:20px;">Download QR Code</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>How Does a Dynamic UPI QR Code Work?</h2>
+      <p>UPI QR codes adhere to the National Payments Corporation of India (NPCI) deep link protocol: <code>upi://pay?pa=VPA&amp;pn=NAME&amp;am=AMOUNT&amp;cu=INR</code>. Scanning this QR code launches any installed UPI application on the customer's smartphone with your payment details pre-filled.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const upiId = document.getElementById('upiId');
+    const payeeName = document.getElementById('payeeName');
+    const amount = document.getElementById('amount');
+    const note = document.getElementById('note');
+    const qrcodeBox = document.getElementById('qrcodeBox');
+    const downloadQrBtn = document.getElementById('downloadQrBtn');
+
+    let qr = null;
+
+    function renderQr() {
+      const vpa = upiId.value.trim();
+      if (!vpa) return;
+      let uri = `upi://pay?pa=${encodeURIComponent(vpa)}&pn=${encodeURIComponent(payeeName.value.trim() || 'Payee')}&cu=INR`;
+      if (amount.value) uri += `&am=${encodeURIComponent(amount.value)}`;
+      if (note.value) uri += `&tn=${encodeURIComponent(note.value)}`;
+
+      qrcodeBox.innerHTML = '';
+      qr = new QRCode(qrcodeBox, {
+        text: uri,
+        width: 180,
+        height: 180,
+        colorDark: "#1A1412",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    [upiId, payeeName, amount, note].forEach(el => el.addEventListener('input', renderQr));
+    renderQr();
+
+    downloadQrBtn.addEventListener('click', () => {
+      const img = qrcodeBox.querySelector('img');
+      if (img && img.src) {
+        const a = document.createElement('a');
+        a.download = `upi-qr-${Date.now()}.png`;
+        a.href = img.src;
+        a.click();
+      }
+    });
+  </script>
+</body>
+</html>

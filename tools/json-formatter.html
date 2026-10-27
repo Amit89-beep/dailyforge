@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter & Validator — Beautify & Debug JSON Online</title>
+  <meta name="description" content="Online JSON formatter, minifier, and validator with instant syntax error detection. Safely parses code locally without network requests.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/json-formatter.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">JSON Formatter</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Developer Utility</span>
+      <h1>JSON Formatter &amp; Validator</h1>
+      <p class="subtitle">Format, minify, and inspect JSON payloads with real-time error isolation.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div class="pill-group">
+        <button class="pill active" onclick="formatJSON(2)">Beautify (2 Spaces)</button>
+        <button class="pill" onclick="formatJSON(4)">Beautify (4 Spaces)</button>
+        <button class="pill" onclick="minifyJSON()">Minify</button>
+        <button class="pill" onclick="copyJSON()">Copy to Clipboard</button>
+      </div>
+
+      <textarea id="jsonArea" class="input-field" rows="12" placeholder="Paste your raw JSON string here..." style="font-family:monospace; resize:vertical; font-size:0.9rem;"></textarea>
+
+      <div id="statusAlert" style="margin-top:14px; padding:10px 14px; border-radius:var(--radius-sm); font-size:0.85rem; display:none;"></div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>Safe Developer Workflows</h2>
+      <p>Developers routinely handle sensitive tokens, configuration parameters, and user profiles in payloads. DailyForge processes JSON directly in your local browser runtime, making it safe to inspect data without sending payloads to third-party logging servers.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const jsonArea = document.getElementById('jsonArea');
+    const statusAlert = document.getElementById('statusAlert');
+
+    function notify(msg, isError) {
+      statusAlert.style.display = 'block';
+      statusAlert.style.background = isError ? '#FEE2E2' : '#DCFCE7';
+      statusAlert.style.color = isError ? '#991B1B' : '#166534';
+      statusAlert.innerText = msg;
+    }
+
+    function formatJSON(space) {
+      try {
+        if (!jsonArea.value.trim()) return;
+        const parsed = JSON.parse(jsonArea.value);
+        jsonArea.value = JSON.stringify(parsed, null, space);
+        notify('Valid JSON formatted successfully!', false);
+      } catch (e) {
+        notify('Invalid JSON: ' + e.message, true);
+      }
+    }
+
+    function minifyJSON() {
+      try {
+        if (!jsonArea.value.trim()) return;
+        const parsed = JSON.parse(jsonArea.value);
+        jsonArea.value = JSON.stringify(parsed);
+        notify('JSON minified successfully!', false);
+      } catch (e) {
+        notify('Invalid JSON: ' + e.message, true);
+      }
+    }
+
+    function copyJSON() {
+      jsonArea.select();
+      navigator.clipboard.writeText(jsonArea.value).then(() => {
+        notify('Copied to clipboard!', false);
+      });
+    }
+  </script>
+</body>
+</html>

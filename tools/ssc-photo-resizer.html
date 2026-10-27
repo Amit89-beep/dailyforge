@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSC Photo & Signature Resizer (20KB - 50KB) | Free & Private</title>
+  <meta name="description" content="Resize and compress photos and signatures for SSC CGL, CHSL, GD, and MTS exam applications. Exact 20KB-50KB size limit, 3.5cm x 4.5cm dimensions. No upload to server.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/ssc-photo-resizer.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SSC Photo and Signature Resizer",
+        "url": "https://dailyforge.tools/tools/ssc-photo-resizer.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the exact photo size required for SSC CGL / CHSL?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The SSC official notification requires a JPEG/JPG photo between 20 KB and 50 KB with dimensions of 3.5 cm width by 4.5 cm height."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the required signature size for SSC exams?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The signature must be in JPEG format between 10 KB and 20 KB with dimensions of 4.0 cm width by 2.0 cm height."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo">
+        <span class="logo-mark">⚡</span>
+        <span class="logo-text">DailyForge</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">SSC Photo Resizer</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Exam Specification Matcher</span>
+      <h1>SSC Photo &amp; Signature Resizer (20 KB – 50 KB)</h1>
+      <p class="subtitle">Format passport photographs and signatures to match official SSC CGL, CHSL, GD, and MTS submission criteria.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div class="radio-pill-group">
+        <button class="pill active" data-type="ssc-photo">SSC Photo (20–50 KB)</button>
+        <button class="pill" data-type="ssc-sign">SSC Signature (10–20 KB)</button>
+        <button class="pill" data-type="upsc-photo">UPSC Photo (20–300 KB)</button>
+        <button class="pill" data-type="ibps-sign">IBPS Signature (10–20 KB)</button>
+      </div>
+
+      <div class="drop-zone" id="dropArea" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+        <p><strong>Click to upload</strong> or drag and drop your photo / signature</p>
+        <span class="drop-sub">JPG, PNG, or WEBP (Processed 100% locally)</span>
+      </div>
+
+      <div id="previewStage" style="display:none; margin-top: 24px; text-align: center;">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Original Weight</div>
+            <div class="metric-value" id="origSize">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Optimized Weight</div>
+            <div class="metric-value" id="newSize" style="color:var(--terracotta);">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Target Dimensions</div>
+            <div class="metric-value" id="newDim">0 x 0</div>
+          </div>
+        </div>
+
+        <div style="margin: 20px auto; max-width: 280px; border: 1px solid var(--border-light); padding: 8px; background: #fff; border-radius: var(--radius-sm);">
+          <canvas id="outputCanvas" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"></canvas>
+        </div>
+
+        <button id="downloadBtn" class="btn-primary">Download Resized Image</button>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>Official SSC Photo &amp; Signature Guidelines</h2>
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Required File Size</th>
+            <th>Dimensions (W × H)</th>
+            <th>Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SSC Photograph</strong></td>
+            <td>20 KB to 50 KB</td>
+            <td>3.5 cm × 4.5 cm (~138 × 177 px)</td>
+            <td>JPEG / JPG</td>
+          </tr>
+          <tr>
+            <td><strong>SSC Signature</strong></td>
+            <td>10 KB to 20 KB</td>
+            <td>4.0 cm × 2.0 cm (~150 × 75 px)</td>
+            <td>JPEG / JPG</td>
+          </tr>
+          <tr>
+            <td><strong>UPSC Photo &amp; Sign</strong></td>
+            <td>20 KB to 300 KB</td>
+            <td>350 × 350 px (Square)</td>
+            <td>JPG</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Step-by-Step SSC Form Photo Resizing</h2>
+      <ol class="steps-list">
+        <li><strong>Upload File:</strong> Tap or drop your clear portrait photo or signature.</li>
+        <li><strong>Automatic Constraint Matching:</strong> The tool crops and scales according to official commission aspect ratios and executes a binary search canvas compression loop.</li>
+        <li><strong>Download:</strong> Verify the generated size falls safely between 20 KB and 50 KB, then download with one click.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <details>
+          <summary>Why did the SSC portal reject my photograph?</summary>
+          <p>Rejections typically occur when candidates submit images outside the 20 KB to 50 KB boundary, photos with glasses/headgear, or dimensions that deviate from 3.5 cm × 4.5 cm.</p>
+        </details>
+        <details>
+          <summary>Is my photo uploaded to your servers?</summary>
+          <p>No. Resizing is conducted entirely in your browser using the HTML5 Canvas API. No images leave your phone or desktop.</p>
+        </details>
+      </div>
+
+      <section class="related-tools">
+        <h3>Other Useful Exam Preparation Tools</h3>
+        <div class="related-grid">
+          <a href="age-calculator.html" class="related-link">📅 Age Calculator (Eligibility)</a>
+          <a href="pdf-merger.html" class="related-link">📑 Merge Certificates into PDF</a>
+          <a href="image-compressor.html" class="related-link">🗜️ Generic Image Compressor</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const previewStage = document.getElementById('previewStage');
+    const canvas = document.getElementById('outputCanvas');
+    const ctx = canvas.getContext('2d');
+    const origSizeText = document.getElementById('origSize');
+    const newSizeText = document.getElementById('newSize');
+    const newDimText = document.getElementById('newDim');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let currentConfig = { w: 138, h: 177, minKB: 20, maxKB: 50 };
+    let loadedImage = null;
+
+    document.querySelectorAll('.radio-pill-group .pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.radio-pill-group .pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const type = btn.getAttribute('data-type');
+        if (type === 'ssc-photo') currentConfig = { w: 138, h: 177, minKB: 20, maxKB: 50 };
+        if (type === 'ssc-sign') currentConfig = { w: 150, h: 75, minKB: 10, maxKB: 20 };
+        if (type === 'upsc-photo') currentConfig = { w: 350, h: 350, minKB: 20, maxKB: 300 };
+        if (type === 'ibps-sign') currentConfig = { w: 140, h: 60, minKB: 10, maxKB: 20 };
+        if (loadedImage) processImage();
+      });
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) handleFile(e.target.files[0]);
+    });
+
+    function handleFile(file) {
+      origSizeText.innerText = (file.size / 1024).toFixed(1) + ' KB';
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        loadedImage = new Image();
+        loadedImage.onload = () => {
+          previewStage.style.display = 'block';
+          processImage();
+        };
+        loadedImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function processImage() {
+      canvas.width = currentConfig.w;
+      canvas.height = currentConfig.h;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(loadedImage, 0, 0, currentConfig.w, currentConfig.h);
+
+      let low = 0.05, high = 0.98, bestQuality = 0.8;
+      for (let i = 0; i < 7; i++) {
+        let mid = (low + high) / 2;
+        let dataUrl = canvas.toDataURL('image/jpeg', mid);
+        let bytes = Math.round((dataUrl.length - 22) * 3 / 4);
+        let kb = bytes / 1024;
+        bestQuality = mid;
+        if (kb > currentConfig.maxKB) high = mid;
+        else if (kb < currentConfig.minKB) low = mid;
+        else break;
+      }
+
+      canvas.toBlob((blob) => {
+        newSizeText.innerText = (blob.size / 1024).toFixed(1) + ' KB';
+        newDimText.innerText = `${currentConfig.w} × ${currentConfig.h} px`;
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.download = `ssc-ready-${Date.now()}.jpg`;
+          a.href = URL.createObjectURL(blob);
+          a.click();
+        };
+      }, 'image/jpeg', bestQuality);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merge PDF Files Offline — 100% Free & Private PDF Joiner</title>
+  <meta name="description" content="Merge multiple PDF files into one single document inside your browser. Safe, fast, and completely private with zero file uploads.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/pdf-merger.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">PDF Merger</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Zero Cloud Processing</span>
+      <h1>Merge PDF Documents Online</h1>
+      <p class="subtitle">Combine multiple PDF documents into a unified file directly inside your browser.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div class="drop-zone" onclick="document.getElementById('pdfFiles').click()">
+        <input type="file" id="pdfFiles" accept="application/pdf" multiple style="display:none;">
+        <p><strong>Click to select PDFs</strong> or drag files here</p>
+        <span class="drop-sub">Select 2 or more PDF documents</span>
+      </div>
+
+      <div id="fileListContainer" style="margin-top:20px; display:none;">
+        <h3 style="font-size:1rem; margin-bottom:10px;">Selected Documents:</h3>
+        <ul id="selectedList" style="list-style:none; padding:0; margin-bottom:20px;"></ul>
+        <button id="mergeBtn" class="btn-primary">Merge PDFs Now</button>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>Client-Side PDF Merging Architecture</h2>
+      <p>Using WebAssembly and JavaScript binary array buffers via <code>pdf-lib</code>, pages from your selected documents are merged in your device's memory. This ensures confidential bank statements and personal identity records remain entirely private.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const pdfFiles = document.getElementById('pdfFiles');
+    const fileListContainer = document.getElementById('fileListContainer');
+    const selectedList = document.getElementById('selectedList');
+    const mergeBtn = document.getElementById('mergeBtn');
+    let loadedPdfs = [];
+
+    pdfFiles.addEventListener('change', (e) => {
+      loadedPdfs = Array.from(e.target.files);
+      if (loadedPdfs.length > 0) {
+        fileListContainer.style.display = 'block';
+        selectedList.innerHTML = '';
+        loadedPdfs.forEach((file, index) => {
+          const li = document.createElement('li');
+          li.style.cssText = 'padding:8px 12px; background:var(--bg-sunken); margin-bottom:6px; border-radius:var(--radius-sm); font-size:0.9rem;';
+          li.innerText = `${index + 1}. ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+          selectedList.appendChild(li);
+        });
+      }
+    });
+
+    mergeBtn.addEventListener('click', async () => {
+      if (loadedPdfs.length < 2) {
+        alert('Please select at least 2 PDF files to merge.');
+        return;
+      }
+      mergeBtn.innerText = 'Merging...';
+      try {
+        const mergedPdf = await PDFLib.PDFDocument.create();
+        for (const file of loadedPdfs) {
+          const arrayBuffer = await file.arrayBuffer();
+          const doc = await PDFLib.PDFDocument.load(arrayBuffer);
+          const copiedPages = await mergedPdf.copyPages(doc, doc.getPageIndices());
+          copiedPages.forEach(page => mergedPdf.addPage(page));
+        }
+        const mergedPdfBytes = await mergedPdf.save();
+        const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+        const a = document.createElement('a');
+        a.download = `merged-document-${Date.now()}.pdf`;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+      } catch (err) {
+        alert('Error merging PDFs: ' + err.message);
+      } finally {
+        mergeBtn.innerText = 'Merge PDFs Now';
+      }
+    });
+  </script>
+</body>
+</html>

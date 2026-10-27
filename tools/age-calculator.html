@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exact Age Calculator — Chronological Age & DOB Breakdown</title>
+  <meta name="description" content="Calculate your exact age in years, months, days, hours, and minutes from your date of birth. Find your birth day of the week and next birthday countdown.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/age-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">Age Calculator</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Date Verification</span>
+      <h1>Chronological Age Calculator</h1>
+      <p class="subtitle">Calculate exact age intervals for exam qualification cutoffs and personal milestones.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" class="input-field" value="2000-01-01">
+        </div>
+        <div class="form-group">
+          <label for="targetDate">Calculate Age as of:</label>
+          <input type="date" id="targetDate" class="input-field">
+        </div>
+      </div>
+
+      <div class="metrics-grid" style="margin-top:20px;">
+        <div class="metric-card">
+          <div class="metric-label">Years</div>
+          <div class="metric-value" id="ageYears">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Months</div>
+          <div class="metric-value" id="ageMonths">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Days</div>
+          <div class="metric-value" id="ageDays">0</div>
+        </div>
+      </div>
+      <p id="extraMeta" style="text-align:center; font-weight:600; color:var(--text-muted); margin-top:14px;"></p>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>Government Exam Age Cutoff Calculations</h2>
+      <p>Competitive exams including UPSC, SSC, IBPS, and State PSCs evaluate minimum and maximum age criteria against specific target cutoff dates (often January 1 or August 1 of the recruitment year). This tool lets you specify both your date of birth and target eligibility date to verify your qualifying age.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const dobInput = document.getElementById('dob');
+    const targetInput = document.getElementById('targetDate');
+    targetInput.value = new Date().toISOString().split('T')[0];
+
+    function calculateAge() {
+      const dob = new Date(dobInput.value);
+      const target = new Date(targetInput.value);
+
+      if (isNaN(dob.getTime()) || isNaN(target.getTime()) || dob > target) return;
+
+      let years = target.getFullYear() - dob.getFullYear();
+      let months = target.getMonth() - dob.getMonth();
+      let days = target.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById('ageYears').innerText = years;
+      document.getElementById('ageMonths').innerText = months;
+      document.getElementById('ageDays').innerText = days;
+
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      document.getElementById('extraMeta').innerText = `Born on a ${daysOfWeek[dob.getDay()]}.`;
+    }
+
+    dobInput.addEventListener('change', calculateAge);
+    targetInput.addEventListener('change', calculateAge);
+    calculateAge();
+  </script>
+</body>
+</html>

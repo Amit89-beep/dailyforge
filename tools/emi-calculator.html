@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan EMI Calculator — Home & Personal Loan EMI Planner</title>
+  <meta name="description" content="Calculate equated monthly installments (EMI) for home, car, and personal loans with interest breakdowns and total repayment schedules.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/emi-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">EMI Calculator</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Loan Planner</span>
+      <h1>Loan EMI Calculator</h1>
+      <p class="subtitle">Calculate monthly loan repayments, interest distributions, and total repayment costs.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+        <div>
+          <div class="form-group">
+            <label for="principal">Loan Principal Amount (₹):</label>
+            <input type="number" id="principal" class="input-field" value="2500000" step="50000">
+          </div>
+          <div class="form-group">
+            <label for="interest">Interest Rate (% p.a.):</label>
+            <input type="number" id="interest" class="input-field" value="8.5" step="0.1">
+          </div>
+          <div class="form-group">
+            <label for="tenure">Loan Tenure (Years):</label>
+            <input type="number" id="tenure" class="input-field" value="15" step="1">
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; justify-content:center;">
+          <div class="metric-card" style="margin-bottom:12px;">
+            <div class="metric-label">Monthly EMI</div>
+            <div class="metric-value" id="emiVal" style="font-size:2rem; color:var(--terracotta);">₹0</div>
+          </div>
+          <div class="metric-card" style="margin-bottom:12px;">
+            <div class="metric-label">Total Interest Payable</div>
+            <div class="metric-value" id="interestVal">₹0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Total Principal + Interest</div>
+            <div class="metric-value" id="totalPaymentVal">₹0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>The Mathematics of Equated Monthly Installments</h2>
+      <p>Standard reducing balance loan EMIs are computed using the formula:</p>
+      <blockquote style="background:var(--bg-sunken); padding:16px; border-left:4px solid var(--terracotta); border-radius:var(--radius-sm); font-family:monospace; margin:16px 0;">
+        EMI = [P × r × (1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> - 1]
+      </blockquote>
+      <p>Where <strong>P</strong> is the principal loan value, <strong>r</strong> is the monthly interest factor, and <strong>n</strong> represents the duration in months.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const pInput = document.getElementById('principal');
+    const iInput = document.getElementById('interest');
+    const tInput = document.getElementById('tenure');
+
+    function fmt(num) {
+      return '₹' + Math.round(num).toLocaleString('en-IN');
+    }
+
+    function calcEmi() {
+      const p = parseFloat(pInput.value) || 0;
+      const r = (parseFloat(iInput.value) || 0) / 12 / 100;
+      const n = (parseFloat(tInput.value) || 0) * 12;
+
+      if (p <= 0 || r <= 0 || n <= 0) return;
+
+      const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const totalPay = emi * n;
+      const totalInterest = totalPay - p;
+
+      document.getElementById('emiVal').innerText = fmt(emi);
+      document.getElementById('interestVal').innerText = fmt(totalInterest);
+      document.getElementById('totalPaymentVal').innerText = fmt(totalPay);
+    }
+
+    [pInput, iInput, tInput].forEach(el => el.addEventListener('input', calcEmi));
+    calcEmi();
+  </script>
+</body>
+</html>

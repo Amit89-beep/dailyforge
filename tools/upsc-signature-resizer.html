@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPSC Signature Resizer (20 KB - 100 KB) | OTR & CSE Compliant</title>
+  <meta name="description" content="Free UPSC signature resizer online. Resize and compress triple or single signatures to official UPSC dimensions (350x350 to 500x500 px, 20KB-100KB). 100% private, zero uploads.">
+  <meta name="keywords" content="upsc signature resizer, upsc otr signature size, upsc signature 20 to 100 kb, upsc cse signature dimensions, compress upsc signature">
+  <link rel="canonical" href="https://dailyforge.tools/tools/upsc-signature-resizer.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UPSC Signature Resizer (20 KB – 100 KB) | Instant & Private">
+  <meta property="og:description" content="Compliant with UPSC OTR & Civil Services (CSE) guidelines. Processes 100% locally in your browser.">
+  <meta property="og:url" content="https://dailyforge.tools/tools/upsc-signature-resizer.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+
+  <!-- Schema.org for Google Search Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "UPSC Signature Resizer",
+        "url": "https://dailyforge.tools/tools/upsc-signature-resizer.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to resize signature for UPSC OTR and CSE applications",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Sign on plain white paper",
+            "text": "Sign using a black or dark ink pen on a clean, unruled sheet of paper."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Upload to tool",
+            "text": "Drag and drop or select your signature image (JPG, PNG, or WEBP)."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download UPSC-ready file",
+            "text": "The tool outputs a JPG file between 20 KB and 100 KB named 'signature.jpg'."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the official signature size required for UPSC applications?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The signature must be in JPG format, between 20 KB and 100 KB in file size, with pixel dimensions between 350 x 350 px and 500 x 500 px."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does UPSC require black ink or blue ink for signatures?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "UPSC officially advises candidates to sign on a plain white paper using a black ink pen for maximum contrast and scanner clarity."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="tool-page">
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo">
+        <span class="logo-mark">⚡</span>
+        <span class="logo-text">DailyForge</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <a href="ssc-photo-resizer.html">SSC Resizer</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard" style="min-height:90px;">
+    <div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div>
+  </div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#exam-tools">Exam Tools</a></li>
+        <li aria-current="page">UPSC Signature Resizer</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">UPSC OTR &amp; CSE Guidelines</span>
+      <h1>UPSC Signature Resizer (20 KB – 100 KB)</h1>
+      <p class="subtitle">Quickly resize single and triple signatures to fit official UPSC dimensions (350×350 to 500×500 px) with strict KB limits.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div class="radio-pill-group">
+        <button class="pill active" data-mode="standard">Standard Signature (400×250 px, 20–100 KB)</button>
+        <button class="pill" data-mode="triple">Triple Signature (350×500 px, 20–100 KB)</button>
+        <button class="pill" data-mode="square">Square Format (400×400 px, 20–100 KB)</button>
+      </div>
+
+      <div class="drop-zone" id="dropArea" onclick="document.getElementById('sigInput').click()">
+        <input type="file" id="sigInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p><strong>Click to upload</strong> or drag signature image here</p>
+        <span class="drop-sub">JPG, PNG, or WEBP (Zero server upload — 100% private)</span>
+      </div>
+
+      <div id="previewStage" style="display:none; margin-top: 24px; text-align: center;">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Original File Size</div>
+            <div class="metric-value" id="origSize">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Target UPSC Size</div>
+            <div class="metric-value" id="newSize" style="color:var(--terracotta);">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Pixel Canvas</div>
+            <div class="metric-value" id="newDim">0 × 0 px</div>
+          </div>
+        </div>
+
+        <div style="margin: 20px auto; max-width: 320px; border: 1px solid var(--border-light); padding: 12px; background: #ffffff; border-radius: var(--radius-sm);">
+          <canvas id="outputCanvas" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"></canvas>
+        </div>
+
+        <button id="downloadBtn" class="btn-primary">Download signature.jpg</button>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle" style="min-height:250px;">
+      <div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div>
+    </div>
+
+    <article class="seo-article">
+      <h2>Official UPSC Signature Specifications</h2>
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>UPSC Official Mandate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>File Format</strong></td>
+            <td>JPG / JPEG only</td>
+          </tr>
+          <tr>
+            <td><strong>File Size (KB)</strong></td>
+            <td>20 KB to 100 KB</td>
+          </tr>
+          <tr>
+            <td><strong>Allowed Dimensions</strong></td>
+            <td>350 px to 500 px (Width/Height)</td>
+          </tr>
+          <tr>
+            <td><strong>Ink &amp; Background</strong></td>
+            <td>Black ink on clean white unruled paper</td>
+          </tr>
+          <tr>
+            <td><strong>Mandatory Filename</strong></td>
+            <td><code>signature.jpg</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>How to Avoid UPSC Signature Rejections</h2>
+      <ol class="steps-list">
+        <li><strong>Use Black Ink:</strong> The UPSC scanner requires high contrast. Sign with a black ballpoint or gel pen.</li>
+        <li><strong>Crop Out Shadows:</strong> Crop tightly around the signature to remove phone camera drop-shadows and desk backgrounds.</li>
+        <li><strong>Maintain Aspect Ratio:</strong> Never stretch signatures horizontally or vertically, as distorted handwriting is flagged during verification at exam centers.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <details>
+          <summary>What is the UPSC Triple Signature requirement?</summary>
+          <p>For certain recent Civil Services (CSE) notices, candidates are instructed to sign three times vertically on a plain sheet with adequate spacing and scan all three into a single image between 20 KB and 100 KB.</p>
+        </details>
+        <details>
+          <summary>Can I upload a signature in PNG or PDF format?</summary>
+          <p>No. The UPSC portal strictly enforces <code>.jpg</code> or <code>.jpeg</code> extensions. This tool automatically converts PNGs to standardized JPG format.</p>
+        </details>
+      </div>
+
+      <section class="related-tools">
+        <h3>Related Exam Application Tools</h3>
+        <div class="related-grid">
+          <a href="ssc-photo-resizer.html" class="related-link">📸 SSC Photo &amp; Sign Resizer</a>
+          <a href="age-calculator.html" class="related-link">📅 UPSC Age Eligibility Calculator</a>
+          <a href="pdf-merger.html" class="related-link">📑 Merge Certificates for OTR</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const sigInput = document.getElementById('sigInput');
+    const previewStage = document.getElementById('previewStage');
+    const canvas = document.getElementById('outputCanvas');
+    const ctx = canvas.getContext('2d');
+    const origSizeText = document.getElementById('origSize');
+    const newSizeText = document.getElementById('newSize');
+    const newDimText = document.getElementById('newDim');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let currentConfig = { w: 400, h: 250, minKB: 25, maxKB: 90 };
+    let loadedImage = null;
+
+    document.querySelectorAll('.radio-pill-group .pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.radio-pill-group .pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.getAttribute('data-mode');
+        if (mode === 'standard') currentConfig = { w: 400, h: 250, minKB: 25, maxKB: 90 };
+        if (mode === 'triple') currentConfig = { w: 350, h: 500, minKB: 25, maxKB: 90 };
+        if (mode === 'square') currentConfig = { w: 400, h: 400, minKB: 25, maxKB: 90 };
+        if (loadedImage) processSignature();
+      });
+    });
+
+    sigInput.addEventListener('change', (e) => {
+      if (e.target.files.length) {
+        const file = e.target.files[0];
+        origSizeText.innerText = (file.size / 1024).toFixed(1) + ' KB';
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          loadedImage = new Image();
+          loadedImage.onload = () => {
+            previewStage.style.display = 'block';
+            processSignature();
+          };
+          loadedImage.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function processSignature() {
+      canvas.width = currentConfig.w;
+      canvas.height = currentConfig.h;
+
+      // Solid white background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Fit image preserving aspect ratio
+      const scale = Math.min((canvas.width - 20) / loadedImage.width, (canvas.height - 20) / loadedImage.height);
+      const x = (canvas.width - loadedImage.width * scale) / 2;
+      const y = (canvas.height - loadedImage.height * scale) / 2;
+      ctx.drawImage(loadedImage, x, y, loadedImage.width * scale, loadedImage.height * scale);
+
+      // Binary search quality targeting for 20KB - 100KB range
+      let low = 0.1, high = 0.98, bestQuality = 0.8;
+      for (let i = 0; i < 7; i++) {
+        let mid = (low + high) / 2;
+        let dataUrl = canvas.toDataURL('image/jpeg', mid);
+        let bytes = Math.round((dataUrl.length - 22) * 3 / 4);
+        let kb = bytes / 1024;
+        bestQuality = mid;
+        if (kb > currentConfig.maxKB) high = mid;
+        else if (kb < currentConfig.minKB) low = mid;
+        else break;
+      }
+
+      canvas.toBlob((blob) => {
+        newSizeText.innerText = (blob.size / 1024).toFixed(1) + ' KB';
+        newDimText.innerText = `${currentConfig.w} × ${currentConfig.h} px`;
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.download = 'signature.jpg';
+          a.href = URL.createObjectURL(blob);
+          a.click();
+        };
+      }, 'image/jpeg', bestQuality);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compress Image Online — Reduce Photo Size in KB (Zero Uploads)</title>
+  <meta name="description" content="Compress JPG, PNG, and WebP images to Under 50KB, 100KB, or 200KB directly in your browser. 100% private, client-side, zero cloud upload.">
+  <link rel="canonical" href="https://dailyforge.tools/tools/image-compressor.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/shared.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../index.html" class="brand-logo"><span class="logo-mark">⚡</span><span class="logo-text">DailyForge</span></a>
+      <div class="nav-links">
+        <a href="../index.html">All Tools</a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-wrapper-leaderboard"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+  <main class="main-content">
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li aria-current="page">Image Compressor</li>
+      </ol>
+    </nav>
+
+    <div class="page-title-block">
+      <span class="badge-tag">Browser-Side Compression</span>
+      <h1>Compress Image Online (KB Reducer)</h1>
+      <p class="subtitle">Compress photos to your exact target file size without losing essential clarity.</p>
+    </div>
+
+    <section class="tool-canvas-container">
+      <div class="radio-pill-group">
+        <button class="pill active" data-target="50">Under 50 KB</button>
+        <button class="pill" data-target="100">Under 100 KB</button>
+        <button class="pill" data-target="200">Under 200 KB</button>
+        <button class="pill" data-target="custom">Custom Slider</button>
+      </div>
+
+      <div class="drop-zone" onclick="document.getElementById('imgUpload').click()">
+        <input type="file" id="imgUpload" accept="image/jpeg,image/png,image/webp" style="display:none;">
+        <p><strong>Click to select photo</strong> or drag file here</p>
+        <span class="drop-sub">PNG, JPEG, WebP supported</span>
+      </div>
+
+      <div id="compControls" style="display:none; margin-top:24px;">
+        <div class="form-group" id="sliderGroup" style="display:none;">
+          <label>Quality Level: <span id="qualityVal">75</span>%</label>
+          <input type="range" id="qualityRange" min="5" max="100" value="75" style="width:100%;">
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Original</div>
+            <div class="metric-value" id="rawSize">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Compressed</div>
+            <div class="metric-value" id="reducedSize" style="color:var(--terracotta);">0 KB</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Savings</div>
+            <div class="metric-value" id="savedPercent">0%</div>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:20px;">
+          <button id="saveImgBtn" class="btn-primary">Download Compressed Image</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="ad-wrapper-rectangle"><div class="ad-box"><span class="ad-tag">ADVERTISEMENT</span></div></div>
+
+    <article class="seo-article">
+      <h2>Why Browser-Side Compression Protects Your Privacy</h2>
+      <p>Traditional image compressor websites upload your sensitive personal photos, IDs, and family memories to remote cloud servers to process them. DailyForge performs all matrix decodes and quantization locally inside your browser's V8 engine, keeping your data confidential.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 DailyForge Tools. Zero-cloud storage privacy guarantee.</p>
+  </footer>
+
+  <script>
+    const imgUpload = document.getElementById('imgUpload');
+    const compControls = document.getElementById('compControls');
+    const rawSizeLabel = document.getElementById('rawSize');
+    const reducedSizeLabel = document.getElementById('reducedSize');
+    const savedPercentLabel = document.getElementById('savedPercent');
+    const qualityRange = document.getElementById('qualityRange');
+    const qualityVal = document.getElementById('qualityVal');
+    const sliderGroup = document.getElementById('sliderGroup');
+    const saveImgBtn = document.getElementById('saveImgBtn');
+
+    let activeImage = null;
+    let targetKB = 50;
+    let customMode = false;
+
+    document.querySelectorAll('.radio-pill-group .pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.radio-pill-group .pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-target');
+        if (target === 'custom') {
+          customMode = true;
+          sliderGroup.style.display = 'block';
+        } else {
+          customMode = false;
+          sliderGroup.style.display = 'none';
+          targetKB = parseInt(target, 10);
+        }
+        if (activeImage) runCompression();
+      });
+    });
+
+    qualityRange.addEventListener('input', (e) => {
+      qualityVal.innerText = e.target.value;
+      if (activeImage && customMode) runCompression();
+    });
+
+    imgUpload.addEventListener('change', (e) => {
+      if (!e.target.files.length) return;
+      const file = e.target.files[0];
+      rawSizeLabel.innerText = (file.size / 1024).toFixed(1) + ' KB';
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        activeImage = new Image();
+        activeImage.onload = () => {
+          compControls.style.display = 'block';
+          runCompression();
+        };
+        activeImage.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function runCompression() {
+      const canvas = document.createElement('canvas');
+      canvas.width = activeImage.width;
+      canvas.height = activeImage.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(activeImage, 0, 0);
+
+      let chosenQuality = customMode ? (parseInt(qualityRange.value, 10) / 100) : 0.8;
+
+      if (!customMode) {
+        let low = 0.05, high = 0.98;
+        for (let i = 0; i < 7; i++) {
+          let mid = (low + high) / 2;
+          let data = canvas.toDataURL('image/jpeg', mid);
+          let kb = Math.round((data.length - 22) * 3 / 4) / 1024;
+          chosenQuality = mid;
+          if (kb > targetKB) high = mid;
+          else low = mid;
+        }
+      }
+
+      canvas.toBlob((blob) => {
+        const outKB = blob.size / 1024;
+        reducedSizeLabel.innerText = outKB.toFixed(1) + ' KB';
+        const rawBytes = parseFloat(rawSizeLabel.innerText) * 1024;
+        const saved = Math.max(0, Math.round(((rawBytes - blob.size) / rawBytes) * 100));
+        savedPercentLabel.innerText = `${saved}%`;
+
+        saveImgBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.download = `compressed-${Date.now()}.jpg`;
+          a.href = URL.createObjectURL(blob);
+          a.click();
+        };
+      }, 'image/jpeg', chosenQuality);
+    }
+  </script>
+</body>
+</html>
